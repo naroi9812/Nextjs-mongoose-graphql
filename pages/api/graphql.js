@@ -8,6 +8,7 @@ import { resolvers } from "../../graphql/resolvers";
 import isAuth from "../../middleware/isAuth";
 
 const cors = Cors();
+// add authorization by context
 const apolloServer = new ApolloServer({ typeDefs, resolvers, context: isAuth });
 
 const startServer = apolloServer.start();
