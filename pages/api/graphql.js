@@ -4,6 +4,8 @@ import Cors from "micro-cors";
 import { typeDefs } from "../../graphql/schemas";
 import { resolvers } from "../../graphql/resolvers";
 
+import connectDB from "../../middleware/connectDB";
+
 const cors = Cors();
 const apolloServer = new ApolloServer({ typeDefs, resolvers });
 
@@ -14,10 +16,15 @@ export default cors(async function handler(req, res) {
     res.end();
     return false;
   }
-  await startServer;
-  await apolloServer.createHandler({
-    path: "/api/graphql",
-  })(req, res);
+  try {
+    await connectDB();
+    await startServer;
+    await apolloServer.createHandler({
+      path: "/api/graphql",
+    })(req, res);
+  } catch (err) {
+    throw err;
+  }
 });
 
 export const config = {
