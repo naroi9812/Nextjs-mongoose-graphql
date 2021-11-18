@@ -35,7 +35,7 @@ const userResolvers = {
     try {
       const findUser = await User.findOne({ email: args.email });
       const { email, password: hashedPw } = findUser._doc;
-      const valid = bcrypt.compare(args.password, hashedPw);
+      const valid = await bcrypt.compare(args.password, hashedPw);
       if (valid) {
         const token = jwt.sign(
           { userId: findUser.id, email: findUser.email },
