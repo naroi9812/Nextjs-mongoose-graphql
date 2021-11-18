@@ -6,11 +6,17 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+form {
+  height: 15rem;
+  width: 15rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
-* {
-  box-sizing: border-box;
+.comment-list {
+  display: flex;
+  flex-direction: column;
+  width: 20rem;
+  height: 100%;
 }

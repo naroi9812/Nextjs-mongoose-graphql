@@ -2,18 +2,19 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 import User from "../model/User";
+import { Comments } from "./helper";
 
 const userResolvers = {
-  getUsers: async (parent, args, context, info) => {
-    try {
-      const users = await User.find();
-      return users.map((user) => {
-        return { ...user._doc, _id: user.id };
-      });
-    } catch (err) {
-      throw err;
-    }
-  },
+  // getUsers: async (parent, args, context, info) => {
+  //   try {
+  //     const users = await User.find();
+  //     return users.map((user) => {
+  //       return { ...user._doc, _id: user.id };
+  //     });
+  //   } catch (err) {
+  //     throw err;
+  //   }
+  // },
   createUser: async (parent, args, context, info) => {
     try {
       const findUser = await User.findOne({ email: args.email });
@@ -26,7 +27,12 @@ const userResolvers = {
         password: hashedPw,
       });
       const res = await newUser.save();
-      return { ...res._doc, password: null, _id: res.id };
+      return {
+        ...res._doc,
+        password: null,
+        _id: res.id,
+        comments: Comments.bind(this, res._doc.comments),
+      };
     } catch (err) {
       throw err;
     }
