@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "apollo-server-micro": "^3.5.0",
-    "axios": "^0.24.0",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "graphql": "^16.0.1",
