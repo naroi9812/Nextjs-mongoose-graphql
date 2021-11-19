@@ -6,6 +6,7 @@ export const resolvers = {
   Query: {
     // getUsers: userResolvers.getUsers,
     login: userResolvers.login,
+    getComments: commentResolvers.getComments,
   },
   Mutation: {
     createUser: userResolvers.createUser,

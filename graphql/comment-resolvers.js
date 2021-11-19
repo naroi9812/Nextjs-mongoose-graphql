@@ -1,6 +1,6 @@
 import User from "../model/User";
 import Comment from "../model/Comment";
-import { transformComment } from "./helper";
+import { Comments, transformComment } from "./helper";
 
 const commentResolvers = {
   createComment: async (parent, args, context, info) => {
@@ -20,6 +20,14 @@ const commentResolvers = {
       creator.comments.push(res);
       await creator.save();
       return transformComment(res);
+    } catch (err) {
+      throw err;
+    }
+  },
+  getComments: async (parent, args, context, info) => {
+    try {
+      const allComments = await Comment.find();
+      return allComments.map((comment) => transformComment(comment));
     } catch (err) {
       throw err;
     }

@@ -40,6 +40,9 @@ const userResolvers = {
   login: async (parent, args, context, info) => {
     try {
       const findUser = await User.findOne({ email: args.email });
+      if (!findUser) {
+        throw new Error("Email or password is incorrect");
+      }
       const { email, password: hashedPw } = findUser._doc;
       const valid = await bcrypt.compare(args.password, hashedPw);
       if (valid) {

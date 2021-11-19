@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import AuthContext from "../store/auth-context";
 
 const UserInfo = (props) => {
+  const authCtx = useContext(AuthContext);
   return (
     <div
       style={{
@@ -10,8 +12,8 @@ const UserInfo = (props) => {
         textAlign: "center",
       }}
     >
-      <h1>User: {props.user ? props.user.email : "null"}</h1>
-      <p>Token: {props.user ? props.user.token : "Please login"}</p>
+      <h1>UserId: {authCtx.userId ? authCtx.userId : "null"}</h1>
+      <p>Token: {authCtx.token ? authCtx.token : "Please login"}</p>
     </div>
   );
 };

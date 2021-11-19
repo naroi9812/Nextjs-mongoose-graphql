@@ -41,7 +41,7 @@ export const transformComment = (comment) => {
     ...comment._doc,
     _id: comment.id,
     createdAt: dateToString(comment._doc.createdAt),
-    updatedAt: dateToString(comment._doc.updateAt),
+    updatedAt: dateToString(comment._doc.updatedAt),
     creator: user.bind(this, comment.creator),
   };
 };

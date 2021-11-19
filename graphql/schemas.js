@@ -21,6 +21,7 @@ export const typeDefs = gql`
   }
   type Query {
     login(email: String!, password: String!): AuthData!
+    getComments: [Comment!]!
   }
   type Mutation {
     createUser(email: String!, password: String!): User

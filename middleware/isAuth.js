@@ -25,8 +25,6 @@ const isAuth = async ({ req }) => {
     return { isAuth, userId };
   }
 
-  console.log(decodedToken);
-
   isAuth = true;
   userId = decodedToken.userId;
   return { isAuth, userId };

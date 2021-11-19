@@ -1,19 +1,18 @@
 import nc from "next-connect";
 import { ApolloServer } from "apollo-server-micro";
-import Cors from "micro-cors";
+import cors from "cors";
 
 import connectDB from "../../middleware/connectDB";
 import { typeDefs } from "../../graphql/schemas";
 import { resolvers } from "../../graphql/resolvers";
 import isAuth from "../../middleware/isAuth";
 
-const cors = Cors();
 // add authorization by context
 const apolloServer = new ApolloServer({ typeDefs, resolvers, context: isAuth });
 
 const startServer = apolloServer.start();
 
-const graphql = cors(async function handler(req, res) {
+const graphql = async function handler(req, res) {
   if (req.method === "OPTIONS") {
     res.end();
     return false;
@@ -27,9 +26,9 @@ const graphql = cors(async function handler(req, res) {
   } catch (err) {
     throw err;
   }
-});
+};
 
-const handler = nc().use(graphql);
+const handler = nc().use(cors(), graphql);
 
 export default handler;
 
