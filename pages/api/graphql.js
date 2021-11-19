@@ -12,7 +12,7 @@ const apolloServer = new ApolloServer({ typeDefs, resolvers, context: isAuth });
 
 const startServer = apolloServer.start();
 
-const graphql = async function handler(req, res) {
+const graphql = async function graphqlHandler(req, res) {
   if (req.method === "OPTIONS") {
     res.end();
     return false;
